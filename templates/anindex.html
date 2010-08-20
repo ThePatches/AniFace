@@ -1,0 +1,10 @@
+{% if anime_list %}
+    <ul>
+    {% for anime in anime_list %}
+        <li><a href="/aniface/anime/{{ anime.ap_slug }}/">{{ anime.a_name }}</a></li>
+    {% endfor %}
+    </ul>
+    
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

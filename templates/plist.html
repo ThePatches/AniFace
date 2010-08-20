@@ -1,0 +1,12 @@
+<title>Priority List</title>
+<h1>Priority List</h1>
+{% if pl %}
+    <ol>
+    {% for entry in pl %}
+        <li>{{ entry.anime.a_name }}</li>
+    {% endfor %}
+    </ol>
+    
+{% else %}
+    <p>No list made.</p>
+{% endif %}

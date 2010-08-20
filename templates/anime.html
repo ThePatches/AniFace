@@ -1,0 +1,19 @@
+<title>Viewing Page - {{ anime.a_name }}</title>
+<h1>{{ anime.a_name }}</h1>
+<h3>Synopsis</h3>
+<div>[Anime Synopsis goes here]</div>
+<h2>File location - {{ anime.location }}</h2>
+
+<table align="center" cellpadding="10" width="30%">
+<tr>
+	<th id="arrow-header">Mark</th>	
+	<th>File</th>
+	<th>Button</th>
+<tr>
+	{% for filename in file_list %}
+	<tr>
+		<td><a href="/aniface/mark/{{ anime.ap_slug }}/?ep={{ forloop.counter }}">Mark</a></td>
+		<td align="center">{{ filename }}</td>
+		<td align="center"><input type="button" value="Play"></td>
+	</tr>
+	{% endfor %}
