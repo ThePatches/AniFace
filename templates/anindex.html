@@ -1,3 +1,6 @@
+<title>AniFace Home</title>
+<div id="ani_list">
+<h3>Anime List</h3>
 {% if anime_list %}
     <ul>
     {% for anime in anime_list %}
@@ -6,5 +9,7 @@
     </ul>
     
 {% else %}
-    <p>No polls are available.</p>
+    <p>No anime to list</p>
 {% endif %}
+</div>
+<b><a href="/aniface/plist">Priority List</a></b>

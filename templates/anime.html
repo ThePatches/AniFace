@@ -1,7 +1,15 @@
+<html>
+<head>
+<!-- <link rel="stylesheet" type="text/css" href="/static/mystyles.css" /> -->
 <title>Viewing Page - {{ anime.a_name }}</title>
+</head>
+<body>
 <h1>{{ anime.a_name }}</h1>
 <h3>Synopsis</h3>
+<b><a href="http://www.anime-planet.com/anime/{{ anime.ap_slug }}">AP Link</a></b>
 <div>[Anime Synopsis goes here]</div>
+
+<div>
 <h2>File location - {{ anime.location }}</h2>
 
 <table align="center" cellpadding="10" width="30%">
@@ -17,3 +25,8 @@
 		<td align="center"><input type="button" value="Play"></td>
 	</tr>
 	{% endfor %}
+</table>
+</div>
+<b><a href="/aniface/">Return to AniFace Home</a></b>
+</body>
+</html>
