@@ -7,9 +7,9 @@ from django.conf.urls.defaults import *
 urlpatterns = patterns('mysite.aniface.views',
     (r'^$', 'index'),
     (r'^plist/$', 'pr_list'),
-    (r'^config/$', 'confug')
+    (r'^config/$', 'confug'),
     (r'^anime/(?P<ap_slug>[\w.+\-]{0,100})/$', 'anime'),
-    (r'^mark/(?P<ap_slug>[\w.+\-]{0,100})/$', 'mark')
+    (r'^mark/(?P<ap_slug>[\w.+\-]{0,100})/$', 'mark'),
     #(r'^(?P<poll_id>\d+)/vote/$', 'vote'),
 )
 
