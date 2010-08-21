@@ -1,0 +1,7 @@
+# Extensions to Ignore
+
+*.pyc
+*.pat
+
+# Extra stuff
+*~
