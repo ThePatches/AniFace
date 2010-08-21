@@ -40,4 +40,4 @@ def mark(request, ap_slug):
     return redirect('/aniface/anime/' + ap_slug)
 
 def confug(request):
-    return HttpResponse("Nothing to see here...")
+    return HttpResponse("Nothing to see here at the moment.")
