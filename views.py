@@ -41,3 +41,7 @@ def mark(request, ap_slug):
 
 def confug(request):
     return HttpResponse("Nothing to see here at the moment.")
+
+def play(request, ap_slug):
+    a = Anime.objects.filter(ap_slug__exact=ap_slug)[0]
+    return redirect('http://thepatches.tumblr.com')

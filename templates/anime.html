@@ -22,7 +22,7 @@
 	<tr>
 		<td><a href="/aniface/mark/{{ anime.ap_slug }}/?ep={{ forloop.counter }}">Mark</a></td>
 		<td align="center">{{ filename }}</td>
-		<td align="center"><input type="button" value="Play"></td>
+		<td align="center"><a href="/aniface/play/{{ anime.ap_slug }}/?fn=?{{ filename }}">Play</a></td>
 	</tr>
 	{% endfor %}
 </table>
