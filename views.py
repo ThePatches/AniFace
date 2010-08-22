@@ -5,6 +5,21 @@ from django.http import HttpResponse
 import os
 import glob
 
+# Class to resolve file transfer issues
+class FileIterWrapper(object):
+  def __init__(self, flo, chunk_size = 1024**2):
+    self.flo = flo
+    self.chunk_size = chunk_size
+
+  def next(self):
+    data = self.flo.read(self.chunk_size)
+    if data:
+      return data
+    else:
+      raise StopIteration
+
+  def __iter__(self):
+    return self
 
 # Create your views here.
 
@@ -15,7 +30,7 @@ def index(request):
 def anime(request, ap_slug):
     a = Anime.objects.filter(ap_slug__exact=ap_slug)[0]
     os.chdir(a.location)
-    flist = glob.glob('*.txt')
+    flist = glob.glob('*')
     return render_to_response('anime.html',
                               {'anime': a, 'file_list' : flist})
 
@@ -44,4 +59,8 @@ def confug(request):
 
 def play(request, ap_slug):
     a = Anime.objects.filter(ap_slug__exact=ap_slug)[0]
-    return redirect('http://thepatches.tumblr.com')
+    val = request.GET['fn']
+    return HttpResponse(FileIterWrapper(open(a.location + '/' + val)),
+                        mimetype='video/x-msvideo')
+
+
