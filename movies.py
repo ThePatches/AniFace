@@ -14,7 +14,7 @@ class FileIterWrapper(object):
   def __iter__(self):
     return self
 
-MIME_HASH = {'mkv' : 'video/x-mastroka', 'avi' : 'video/x-msvideo'}
+MIME_HASH = {'mkv' : 'video/x-mastroka', 'avi' : 'video/x-msvideo', 'mov' : 'video/quicktime'}
 BAD_TYPE = 'BAD TYPE!'
 
 def GetMime(fname):
