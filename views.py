@@ -46,12 +46,14 @@ def confug(request):
     
 def movepl(request, ap_slug):
     val = int(request.GET['dr'])
+    u = User.objects.get(pk=1)
+    
     if val > 2:
        raise Http404
     
     if val == 1:
-        MoveUp(ap_slug, 1)
+        MoveUp(ap_slug, u)
     else:
-        return HttpResponse('MoveDown not implemented!')
-        
+        MoveDown(ap_slug, u)
+
     return redirect('/aniface/plist/')
