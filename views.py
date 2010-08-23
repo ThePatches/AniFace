@@ -1,7 +1,9 @@
 from django.shortcuts import render_to_response, redirect
 from mysite.aniface.models import Anime, P_List, AniPerList
+from mysite.aniface.mvmt import *
 from django.contrib.auth.models import User
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
+import mysite.aniface.mvmt
 import os
 import glob
 
@@ -21,7 +23,7 @@ def anime(request, ap_slug):
 
 def pr_list(request):
     u = User.objects.get(pk=1) # should be replaced with auth code...
-    pl = P_List.objects.all().filter(person=u)
+    pl = P_List.objects.all().filter(person=u).order_by('ordinal')
     return render_to_response('plist.html', {'pl' : pl})
 
 def mark(request, ap_slug):
@@ -41,3 +43,15 @@ def mark(request, ap_slug):
 
 def confug(request):
     return HttpResponse("Nothing to see here at the moment.")
+    
+def movepl(request, ap_slug):
+    val = int(request.GET['dr'])
+    if val > 2:
+       raise Http404
+    
+    if val == 1:
+        MoveUp(ap_slug, 1)
+    else:
+        return HttpResponse('MoveDown not implemented!')
+        
+    return redirect('/aniface/plist/')

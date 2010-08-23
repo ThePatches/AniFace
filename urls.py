@@ -10,7 +10,7 @@ urlpatterns = patterns('mysite.aniface.views',
     (r'^config/$', 'confug'),
     (r'^anime/(?P<ap_slug>[\w.+\-]{0,100})/$', 'anime'),
     (r'^mark/(?P<ap_slug>[\w.+\-]{0,100})/$', 'mark'),
-    #(r'^(?P<poll_id>\d+)/vote/$', 'vote'),
+    (r'^move/(?P<ap_slug>[\w.+\-]{0,100})/$', 'movepl'),
 )
 
 

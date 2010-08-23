@@ -4,12 +4,16 @@
 {% if pl %}
     <ol>
     {% for entry in pl %}
-        <li>{{ entry.anime.a_name }}</li>
+        <li>{{ entry.anime.a_name }} <a href="/aniface/move/{{ entry.anime.ap_slug }}/?dr=1">Up</a>&nbsp;<a href="/aniface/move/{{ entry.anime.ap_slug }}/?dr=2">Down</a></li>
     {% endfor %}
     </ol>
     
 {% else %}
-    <p>No list made/plist/.</p>
+    <p>No list made.</p>
 {% endif %}
+</div>
+
+<div id="extras_form">
+    [This space left purposefully blank]
 </div>
 <b><a href="/aniface/">Return to AniFace Home</a></b>
