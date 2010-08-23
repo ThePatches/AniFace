@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import *
+from django.conf import settings
 
 # Uncomment the next two lines to enable the admin:
 #from django.contrib import admin
@@ -13,6 +14,11 @@ urlpatterns = patterns('mysite.aniface.views',
     (r'^move/(?P<ap_slug>[\w.+\-]{0,100})/$', 'movepl'),
 )
 
+if settings.DEBUG:
+    urlpatterns += patterns('',
+                            (r'^af_media/(?P<path>.*)$', 'django.views.static.serve',
+        {'document_root': '/home/patches/mysite/aniface/templates'}),
+)
 
 # Example:
     # (r'^mysite/', include('mysite.foo.urls')),
