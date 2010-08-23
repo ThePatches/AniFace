@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response, redirect
 from mysite.aniface.models import Anime, P_List, AniPerList
 from mysite.aniface.movies import *
 from django.contrib.auth.models import User
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 import os
 import glob
 
@@ -45,6 +45,10 @@ def confug(request):
 def play(request, ap_slug):
     a = Anime.objects.filter(ap_slug__exact=ap_slug)[0]
     val = request.GET['fn']
+    m_type = GetMime(val)
+
+    if m_type == BAD_TYPE:
+        return HttpResponseBadRequest('Bad MIME Type passed!')
     return HttpResponse(FileIterWrapper(open(a.location + '/' + val)),
                         mimetype=GetMime(val))
 
