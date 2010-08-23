@@ -1,25 +1,10 @@
 from django.shortcuts import render_to_response, redirect
 from mysite.aniface.models import Anime, P_List, AniPerList
+from mysite.aniface.movies import *
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 import os
 import glob
-
-# Class to resolve file transfer issues
-class FileIterWrapper(object):
-  def __init__(self, flo, chunk_size = 1024**2):
-    self.flo = flo
-    self.chunk_size = chunk_size
-
-  def next(self):
-    data = self.flo.read(self.chunk_size)
-    if data:
-      return data
-    else:
-      raise StopIteration
-
-  def __iter__(self):
-    return self
 
 # Create your views here.
 
@@ -55,12 +40,12 @@ def mark(request, ap_slug):
     return redirect('/aniface/anime/' + ap_slug)
 
 def confug(request):
-    return HttpResponse("Nothing to see here at the moment.")
+    return HttpResponse('Nothing to see here...')
 
 def play(request, ap_slug):
     a = Anime.objects.filter(ap_slug__exact=ap_slug)[0]
     val = request.GET['fn']
     return HttpResponse(FileIterWrapper(open(a.location + '/' + val)),
-                        mimetype='video/x-msvideo')
+                        mimetype=GetMime(val))
 
 
