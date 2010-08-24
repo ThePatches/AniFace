@@ -12,3 +12,8 @@ font-family: Raavi;
 
 ol, ul {font-weight: bold;}
 
+A.List:link, A.List:visited {color: blue}
+A.List:hover {color: red}
+A.List:active {color: purple}
+
+

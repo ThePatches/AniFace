@@ -3,7 +3,7 @@ from mysite.aniface.models import Anime, P_List, AniPerList
 from mysite.aniface.mvmt import *
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseBadRequest
 import mysite.aniface.mvmt
 import os
 import glob
@@ -71,3 +71,13 @@ def movepl(request, ap_slug):
         MoveDown(ap_slug, u)
 
     return redirect('/aniface/plist/')
+    
+@login_required()
+def rm_plist(request):
+    loc = int(request.GET['loc'])
+    u = request.user
+    
+    if RemFrom(u, loc) == 1:
+        return HttpResponseBadRequest('Errors occurred on removal')
+    else:
+        return redirect('/aniface/plist')

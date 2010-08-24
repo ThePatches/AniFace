@@ -9,7 +9,6 @@
 <b><a class="APStuff" href="http://www.anime-planet.com/anime/{{ anime.ap_slug }}">AP Link</a></b>
 <div class="APStuff">[Anime Synopsis goes here]</div>
 
-<div>
 <h2>File location - {{ anime.location }}</h2>
 
 <table align="center" cellpadding="10" width="30%">
@@ -17,7 +16,7 @@
 	<th id="arrow-header">Mark</th>	
 	<th>File</th>
 	<th>Button</th>
-<tr>
+</tr>
 	{% for filename in file_list %}
 	<tr>
 		<td>
@@ -32,7 +31,6 @@
 	</tr>
 	{% endfor %}
 </table>
-</div>
 <b><a href="/aniface/">Return to AniFace Home</a></b>
 </body>
 </html>

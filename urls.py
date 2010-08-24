@@ -12,6 +12,7 @@ urlpatterns = patterns('mysite.aniface.views',
     (r'^anime/(?P<ap_slug>[\w.+\-]{0,100})/$', 'anime'),
     (r'^mark/(?P<ap_slug>[\w.+\-]{0,100})/$', 'mark'),
     (r'^move/(?P<ap_slug>[\w.+\-]{0,100})/$', 'movepl'),
+    (r'^remove/$', 'rm_plist'),
 )
 
 if settings.DEBUG:
