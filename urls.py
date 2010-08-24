@@ -9,12 +9,15 @@ urlpatterns = patterns('aniface.views',
     (r'^$', 'index'),
     (r'^plist/$', 'pr_list'),
     (r'^config/$', 'confug'),
+    (r'^logout/$', 'leave'),
+    (r'^login/$', 'go_login'),
     (r'^anime/(?P<ap_slug>[\w.+\-]{0,100})/$', 'anime'),
     (r'^mark/(?P<ap_slug>[\w.+\-]{0,100})/$', 'mark'),
     (r'^move/(?P<ap_slug>[\w.+\-]{0,100})/$', 'movepl'),
     (r'^remove/$', 'rm_plist'),
     (r'^add_to_list/$', 'add_plist'),
-    (r'^play/(?P<ap_slug>[\w.+\-]{0,100})/$', 'play')
+    (r'^play/(?P<ap_slug>[\w.+\-]{0,100})/$', 'play'),
+    (r'^user/(?P<u_name>\w+)/$', 'u_page'),
 )
 
 if settings.DEBUG:

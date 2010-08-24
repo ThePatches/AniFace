@@ -1,15 +1,25 @@
-<html>
-<head>
-<link rel="stylesheet" type="text/css" href="/aniface/af_media/mystyles.css" />
-<title>Viewing Page - {{ anime.a_name }}</title>
-</head>
-<body>
-<h1>{{ anime.a_name }}</h1>
+{% extends 'base.html' %}
+{% block title %}{{ anime.a_name }}{% endblock %}
+
+
+{% block t_line %}
+{{ anime.a_name }}
+{% if marker == -1 %}- <font class="Watched">Watched</font>{% endif %}
+{% endblock %}
+
+{% block body %}
+<div class="Watchers">
+<b>Watching:</b>{% for watcher in watchers %}
+{{ watcher.person.username }}
+{% endfor %}
+</div>
+{% if anime.is_anime %}
 <div class="APStuff">
 <h3>Synopsis</h3>
 <b><a href="http://www.anime-planet.com/anime/{{ anime.ap_slug }}">AP Link</a></b>
 <p id="synop">[Anime Synopsis goes here]</p>
 </div>
+{% endif %}
 
 <h2>File location - {{ anime.location }}</h2>
 
@@ -20,19 +30,26 @@
 	<th>Button</th>
 </tr>
 	{% for filename in file_list %}
-	<tr>
+	{% if marker == forloop.counter %}
+	<tr class="Marked">
 		<td>
-		{% if marker == forloop.counter %}
 		Marked
 		{% else %}
-		<a href="/aniface/mark/{{ anime.ap_slug }}/?ep={{ forloop.counter }}">Mark</a>
+		{% if forloop.counter < marker  or marker == -1 %}
+			<tr class="Watched">
+		{% else %}
+			<tr>
+		{% endif %}
+			<td> 
+		<a class="List" href="{% url aniface.views.mark anime.ap_slug %}?ep={{ forloop.counter }}">Mark</a>
 		{% endif %}
 		</td>
 		<td align="center">{{ filename }}</td>
-		<td align="center"><a href="/aniface/play/{{ anime.ap_slug }}/?fn={{ filename }}">Play</a></td>
+		<td align="center"><a href="{% url aniface.views.play anime.ap_slug %}?fn={{ filename }}">Play</a></td>
 	</tr>
 	{% endfor %}
 </table>
-<b><a href="/aniface/">Return to AniFace Home</a></b>
-</body>
-</html>
+<a class="List" href="{% url aniface.views.mark anime.ap_slug %}?ep=-1">Mark Watched</a>
+{% endblock %}
+
+{{ block.footer }}

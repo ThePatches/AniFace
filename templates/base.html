@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>{% block title %}Title Here{% endblock %}</title>
+<link rel="stylesheet" type="text/css" href="/aniface/af_media/mystyles.css" />
+</head>
+<body>
+    You are logged in as: {{ u.username }} {% if u.username != 'Guest' %} -
+    <a class="List" href="{% url aniface.views.leave %}">log out</a>
+    {% else %}
+    <a class="List" href="{% url aniface.views.go_login %}">log in</a>
+    {% endif %}
+    
+    <h1>{% block t_line %}Page Title Line Here{% endblock %}</h1>
+    {% block body %}
+    Body Here.
+    {% endblock %}
+
+{% block footer %}
+<hr />
+<p class="Footer"><a href="{%url aniface.views.index %}">Return to AniFace Home</a> -
+<a href="/admin/">Site Admin</a></p>
+{% endblock %}
+</body>
+</html>

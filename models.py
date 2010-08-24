@@ -6,6 +6,7 @@ class Anime(models.Model):
     a_name = models.CharField(max_length=200)
     location = models.CharField(max_length=200)
     ap_slug = models.CharField(max_length=200)
+    is_anime = models.BooleanField(default=True)
     def __unicode__(self):
         return self.a_name
         

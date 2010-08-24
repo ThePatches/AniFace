@@ -1,7 +1,8 @@
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render_to_response, redirect, get_object_or_404
 from aniface.models import Anime, P_List, AniPerList
 from mysite.aniface.mvmt import *
-from django.contrib.auth.models import User
+from django.contrib.auth import logout
+from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404, HttpResponseBadRequest
 from django.template import RequestContext
@@ -12,11 +13,19 @@ import glob
 # Create your views here.
 
 def index(request):
+    if request.user.is_authenticated():
+        u = request.user
+    else:
+        u = AnonymousUser()
+        u.username='Guest'
+        
     anime_list = Anime.objects.all().order_by("a_name")
-    return render_to_response('anindex.html', {'anime_list': anime_list})
+    return render_to_response('anindex.html', {'anime_list': anime_list, 'u' : u})
 
 def anime(request, ap_slug):
+    u = request.user
     a = Anime.objects.filter(ap_slug__exact=ap_slug)[0]
+    watchers = AniPerList.objects.filter(anime=a, curr_episode__gt=0)
     os.chdir(a.location)
     flist = glob.glob('*')
     
@@ -32,14 +41,15 @@ def anime(request, ap_slug):
 
     return render_to_response('anime.html',
                               {'anime': a, 'file_list' : flist,
-                              'marker' : marker})
+                              'marker' : marker, 'u' : u,
+                               'watchers' : watchers})
 
 @login_required()
 def pr_list(request):
     u = request.user
     pl = P_List.objects.filter(person=u).order_by('ordinal') # pull the priority list
     alist = Anime.objects.exclude(id__in=pl.values_list('anime')) # pull the excluded anime list
-    return render_to_response('plist.html', {'pl' : pl, 'alist' : alist},
+    return render_to_response('plist.html', {'pl' : pl, 'alist' : alist, 'u' : request.user},
                               context_instance=RequestContext(request))
 
 @login_required()
@@ -103,3 +113,18 @@ def play(request, ap_slug):
         return HttpResponseBadRequest('Bad MIME Type passed!')
     return HttpResponse(FileIterWrapper(open(a.location + '/' + val)),
                         mimetype=GetMime(val))
+    
+    
+def leave(request):
+    logout(request)
+    return render_to_response('logout.html')
+
+def go_login(request): #goes to login and redirects to the main page.
+    return redirect('/accounts/login/?next=/aniface/')
+
+def u_page(request, u_name):
+    u = get_object_or_404(User, username=u_name)
+    plist = P_List.objects.filter(person=u).order_by('ordinal')
+    watching = AniPerList.objects.filter(person=u, curr_episode__gt=0)
+    return render_to_response('person.html', {'u' : u, 'plist' : plist,
+                                              'watching' : watching}) 
