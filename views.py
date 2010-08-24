@@ -124,4 +124,7 @@ def go_login(request): #goes to login and redirects to the main page.
 
 def u_page(request, u_name):
     u = get_object_or_404(User, username=u_name)
-    return HttpResponse(u.first_name + ' ' + u.last_name)
+    plist = P_List.objects.filter(person=u).order_by('ordinal')
+    watching = AniPerList.objects.filter(person=u, curr_episode__gt=0)
+    return render_to_response('person.html', {'u' : u, 'plist' : plist,
+                                              'watching' : watching}) 
