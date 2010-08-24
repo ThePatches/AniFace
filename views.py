@@ -25,6 +25,7 @@ def index(request):
 def anime(request, ap_slug):
     u = request.user
     a = Anime.objects.filter(ap_slug__exact=ap_slug)[0]
+    watchers = AniPerList.objects.filter(anime=a, curr_episode__gt=0)
     os.chdir(a.location)
     flist = glob.glob('*')
     
@@ -40,7 +41,8 @@ def anime(request, ap_slug):
 
     return render_to_response('anime.html',
                               {'anime': a, 'file_list' : flist,
-                              'marker' : marker, 'u' : u})
+                              'marker' : marker, 'u' : u,
+                               'watchers' : watchers})
 
 @login_required()
 def pr_list(request):

@@ -6,8 +6,12 @@
 {{ anime.a_name }}
 {% if marker == -1 %}- <font class="Watched">Watched</font>{% endif %}
 </h1>
+<div class="Watchers">
+<b>Watching:</b>{% for watcher in watchers %}
+{{ watcher.person.username }}
+{% endfor %}
+</div>
 {% if anime.is_anime %}
-<div class="Watchers"></div>
 <div class="APStuff">
 <h3>Synopsis</h3>
 <b><a href="http://www.anime-planet.com/anime/{{ anime.ap_slug }}">AP Link</a></b>

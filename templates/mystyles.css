@@ -9,6 +9,7 @@ font-family: Raavi, sans-serif;
 }
 
 .APStuff {font-style: italic;}
+.Watchers {font-family: courier; font-style: italic;}
 
 ol, ul {font-weight: bold; }
 li {list-style-type: katakana;}
