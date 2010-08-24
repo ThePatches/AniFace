@@ -20,7 +20,13 @@
 <tr>
 	{% for filename in file_list %}
 	<tr>
-		<td><a href="/aniface/mark/{{ anime.ap_slug }}/?ep={{ forloop.counter }}">Mark</a></td>
+		<td>
+		{% if marker == forloop.counter %}
+		Marked
+		{% else %}
+		<a href="/aniface/mark/{{ anime.ap_slug }}/?ep={{ forloop.counter }}">Mark</a>
+		{% endif %}
+		</td>
 		<td align="center">{{ filename }}</td>
 		<td align="center"><input type="button" value="Play"></td>
 	</tr>
