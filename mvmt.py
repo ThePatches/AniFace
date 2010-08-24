@@ -34,7 +34,7 @@ def MoveDown(apslug, u): #should maybe be user? probably
 def PlaceIn(apslug, u, loc):
     a = Anime.objects.get(ap_slug=apslug)
     
-    if P_List.objects.filter(anime=a).exists(): # protection against duplicates
+    if P_List.objects.filter(anime=a, person=u).exists(): # protection against duplicates
         return 1
     
     list_loc = P_List.objects.all().filter(person=u, ordinal=loc)
