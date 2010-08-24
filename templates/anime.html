@@ -1,9 +1,7 @@
-<html>
-<head>
-<link rel="stylesheet" type="text/css" href="/aniface/af_media/mystyles.css" />
-<title>Viewing Page - {{ anime.a_name }}</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}{{ anime.a_name }}{% endblock %}
+
+{% block body %}
 <h1>{{ anime.a_name }}</h1>
 <div class="APStuff">
 <h3>Synopsis</h3>
@@ -20,19 +18,20 @@
 	<th>Button</th>
 </tr>
 	{% for filename in file_list %}
-	<tr>
+	{% if marker == forloop.counter %}
+	<tr class="Watched">
 		<td>
-		{% if marker == forloop.counter %}
 		Marked
 		{% else %}
-		<a href="/aniface/mark/{{ anime.ap_slug }}/?ep={{ forloop.counter }}">Mark</a>
+		<tr>
+			<td>
+		<a class="List" href="{% url aniface.views.mark anime.ap_slug %}?ep={{ forloop.counter }}">Mark</a>
 		{% endif %}
 		</td>
 		<td align="center">{{ filename }}</td>
-		<td align="center"><a href="/aniface/play/{{ anime.ap_slug }}/?fn={{ filename }}">Play</a></td>
+		<td align="center"><a href="{% url aniface.views.play anime.ap_slug %}?fn={{ filename }}">Play</a></td>
 	</tr>
 	{% endfor %}
 </table>
 <b><a href="/aniface/">Return to AniFace Home</a></b>
-</body>
-</html>
+{% endblock %}

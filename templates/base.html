@@ -7,9 +7,9 @@
 </head>
 <body>
     You are logged in as: {{ u.username }} {% if u.username != 'Guest' %} -
-    <a href="{% url aniface.views.leave %}">logout</a>
+    <a class="List" href="{% url aniface.views.leave %}">log out</a>
     {% else %}
-    <a href="{% url aniface.views.go_login %}">login</a>
+    <a class="List" href="{% url aniface.views.go_login %}">log in</a>
     {% endif %}
     {% block body %}
     Body Here.

@@ -23,6 +23,7 @@ def index(request):
     return render_to_response('anindex.html', {'anime_list': anime_list, 'u' : u})
 
 def anime(request, ap_slug):
+    u = request.user
     a = Anime.objects.filter(ap_slug__exact=ap_slug)[0]
     os.chdir(a.location)
     flist = glob.glob('*')
@@ -39,7 +40,7 @@ def anime(request, ap_slug):
 
     return render_to_response('anime.html',
                               {'anime': a, 'file_list' : flist,
-                              'marker' : marker})
+                              'marker' : marker, 'u' : u})
 
 @login_required()
 def pr_list(request):
