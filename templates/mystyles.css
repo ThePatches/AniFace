@@ -9,6 +9,7 @@ font-family: Raavi, sans-serif;
 }
 
 .APStuff {font-style: italic;}
+.Watchers {font-family: courier; font-style: italic;}
 
 ol, ul {font-weight: bold; }
 li {list-style-type: katakana;}
@@ -19,7 +20,8 @@ A.List:link, A.List:visited {color: blue}
 A.List:hover {color: red}
 A.List:active {color: purple}
 
-TR.Watched {background-color: #66CCCC}
+TR.Watched {background-color: #339999}
+TR.Marked {background-color: #66CCCC}
 
 P.Footer
     {
@@ -28,3 +30,5 @@ P.Footer
     font-size: large;
     text-align: center;
     }
+    
+h1.Watched {font-style: italic; font-size: medium;}
