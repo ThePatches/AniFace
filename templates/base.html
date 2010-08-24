@@ -1,0 +1,15 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>{% block title %}Title Here{% endblock %}</title>
+<link rel="stylesheet" type="text/css" href="/aniface/af_media/mystyles.css" />
+</head>
+<body>
+    You are logged in as: {{ u.username }} -
+    <a href="{% url aniface.views.leave %}">logout</a>
+    {% block body %}
+    Body Here.
+    {% endblock %}
+</body>
+</html>
