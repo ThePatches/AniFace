@@ -1,14 +1,19 @@
 from django.shortcuts import render_to_response, redirect
 from mysite.aniface.models import Anime, P_List, AniPerList
+<<<<<<< HEAD
 from mysite.aniface.mvmt import *
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404, HttpResponseBadRequest
 from django.template import RequestContext
 import mysite.aniface.mvmt
+=======
+from mysite.aniface.movies import *
+from django.contrib.auth.models import User
+from django.http import HttpResponse, HttpResponseBadRequest
+>>>>>>> launch
 import os
 import glob
-
 
 # Create your views here.
 
@@ -19,6 +24,7 @@ def index(request):
 def anime(request, ap_slug):
     a = Anime.objects.filter(ap_slug__exact=ap_slug)[0]
     os.chdir(a.location)
+<<<<<<< HEAD
     flist = glob.glob('*.txt')
     if request.user.is_authenticated():
         mark = AniPerList.objects.all().filter(person=request.user,
@@ -29,6 +35,9 @@ def anime(request, ap_slug):
             marker = mark[0].curr_episode
     else:
         marker = 0
+=======
+    flist = glob.glob('*')
+>>>>>>> launch
     return render_to_response('anime.html',
                               {'anime': a, 'file_list' : flist,
                               'marker' : marker})
@@ -93,3 +102,13 @@ def add_plist(request):
     #PlaceIn('shamanic-princess', u, 2)
     
     return redirect('/aniface/plist')
+
+def play(request, ap_slug):
+    a = Anime.objects.filter(ap_slug__exact=ap_slug)[0]
+    val = request.GET['fn']
+    m_type = GetMime(val)
+
+    if m_type == BAD_TYPE:
+        return HttpResponseBadRequest('Bad MIME Type passed!')
+    return HttpResponse(FileIterWrapper(open(a.location + '/' + val)),
+                        mimetype=GetMime(val))
