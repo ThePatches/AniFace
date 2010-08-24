@@ -16,7 +16,8 @@ urlpatterns = patterns('aniface.views',
     (r'^move/(?P<ap_slug>[\w.+\-]{0,100})/$', 'movepl'),
     (r'^remove/$', 'rm_plist'),
     (r'^add_to_list/$', 'add_plist'),
-    (r'^play/(?P<ap_slug>[\w.+\-]{0,100})/$', 'play')
+    (r'^play/(?P<ap_slug>[\w.+\-]{0,100})/$', 'play'),
+    (r'^user/(?P<u_name>\w+)/$', 'u_page'),
 )
 
 if settings.DEBUG:
