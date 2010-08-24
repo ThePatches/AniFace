@@ -2,8 +2,12 @@
 {% block title %}{{ anime.a_name }}{% endblock %}
 
 {% block body %}
-<h1>{{ anime.a_name }}</h1>
+<h1>
+{{ anime.a_name }}
+{% if marker == -1 %}- <font class="Watched">Watched</font>{% endif %}
+</h1>
 {% if anime.is_anime %}
+<div class="Watchers"></div>
 <div class="APStuff">
 <h3>Synopsis</h3>
 <b><a href="http://www.anime-planet.com/anime/{{ anime.ap_slug }}">AP Link</a></b>
@@ -25,7 +29,7 @@
 		<td>
 		Marked
 		{% else %}
-		{% if forloop.counter < marker %}
+		{% if forloop.counter < marker  or marker == -1 %}
 			<tr class="Watched">
 		{% else %}
 			<tr>
@@ -39,6 +43,7 @@
 	</tr>
 	{% endfor %}
 </table>
+<a class="List" href="{% url aniface.views.mark anime.ap_slug %}?ep=-1">Mark Watched</a>
 {% endblock %}
 
 {{ block.footer }}
