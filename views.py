@@ -19,6 +19,7 @@ def anime(request, ap_slug):
     a = Anime.objects.filter(ap_slug__exact=ap_slug)[0]
     os.chdir(a.location)
     flist = glob.glob('*')
+    
     if request.user.is_authenticated():
         mark = AniPerList.objects.all().filter(person=request.user,
                                                        anime=a)
@@ -28,6 +29,7 @@ def anime(request, ap_slug):
             marker = mark[0].curr_episode
     else:
         marker = 0
+
     return render_to_response('anime.html',
                               {'anime': a, 'file_list' : flist,
                               'marker' : marker})
@@ -89,7 +91,6 @@ def add_plist(request):
     u = request.user
     for an in Anime.objects.all():
         if an.ap_slug in request.POST: PlaceIn(an.ap_slug, u, request.POST[an.ap_slug])
-    #PlaceIn('shamanic-princess', u, 2)
     
     return redirect('/aniface/plist')
 
