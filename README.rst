@@ -32,3 +32,7 @@ This workflow represents the stable and final changes for the application
 Clean-Up
 -----------
 This workflow is for cleaning up HTML issues. Anything that will affect the interface should be branched from here.
+
+Quick-Fix
+----------
+If this branch shows up, it's because I've changed something quickly on *italics*Master*italics*
