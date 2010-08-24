@@ -5,7 +5,7 @@ from django.conf import settings
 #from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('mysite.aniface.views',
+urlpatterns = patterns('aniface.views',
     (r'^$', 'index'),
     (r'^plist/$', 'pr_list'),
     (r'^config/$', 'confug'),

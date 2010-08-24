@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response, redirect
-from mysite.aniface.models import Anime, P_List, AniPerList
+from aniface.models import Anime, P_List, AniPerList
 from mysite.aniface.mvmt import *
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
