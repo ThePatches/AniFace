@@ -28,3 +28,7 @@ Master
 -----------
 This workflow represents the stable and final changes for the application
 (going foward).
+
+Clean-Up
+-----------
+This workflow is for cleaning up HTML issues. Anything that will affect the interface should be branched from here.
