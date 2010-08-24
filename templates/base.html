@@ -14,5 +14,11 @@
     {% block body %}
     Body Here.
     {% endblock %}
+
+{% block footer %}
+<hr />
+<p class="Footer"><a href="{%url aniface.views.index %}">Return to AniFace Home</a> -
+<a href="/admin/">Site Admin</a></p>
+{% endblock %}
 </body>
 </html>
