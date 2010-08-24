@@ -17,7 +17,7 @@ urlpatterns = patterns('mysite.aniface.views',
 if settings.DEBUG:
     urlpatterns += patterns('',
                             (r'^af_media/(?P<path>.*)$', 'django.views.static.serve',
-        {'document_root': '/home/patches/mysite/aniface/templates'}),
+        {'document_root': settings.ANI_MEDIA_ROOT}),
 )
 
 # Example:
