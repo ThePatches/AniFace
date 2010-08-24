@@ -12,7 +12,6 @@ font-family: Raavi, sans-serif;
 .Watchers {font-family: courier; font-style: italic;}
 
 ol, ul {font-weight: bold; }
-li {list-style-type: katakana;}
 li.PList {list-style: none;}
 input.PListText {width: 40px;}
 

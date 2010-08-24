@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 {% block title %}{{ anime.a_name }}{% endblock %}
 
-{% block body %}
-<h1>
+
+{% block t_line %}
 {{ anime.a_name }}
 {% if marker == -1 %}- <font class="Watched">Watched</font>{% endif %}
-</h1>
+{% endblock %}
+
+{% block body %}
 <div class="Watchers">
 <b>Watching:</b>{% for watcher in watchers %}
 {{ watcher.person.username }}

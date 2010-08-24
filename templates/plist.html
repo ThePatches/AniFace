@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% block title %}Priority List{% endblock %}
 
+
+{% block t_line %}Priority List for {{ u.username }}{% endblock %}
 {% block body %}
 <div id="p_list">
-<h1>Priority List for {{ u.username }}</h1>
 {% if pl %}
     <ol>
     {% for entry in pl %}
@@ -19,6 +20,7 @@
 {% endif %}
 </div>
 
+{% if alist.count > 0 %}
 <div id="extras_form">
     <h2>Add Anime to the Priority List</h2>
 <form action="{% url aniface.views.add_plist %}" method="post">
@@ -31,5 +33,6 @@
 <input type="submit" value="Add" />
 </form>
 </div>
+{% endif %}
 <b><a href="/aniface/">Return to AniFace Home</a></b>
 {% endblock %}
