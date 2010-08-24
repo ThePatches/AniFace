@@ -2,4 +2,24 @@
 
 {% block title %}User Page for {{ u.username }}{% endblock %}
 
+{% block body %}
+<div id="WatchList">
+<h3>Watching List</h3>
+<ul>
+	{% for w in watching %}
+	<li>{{ w.anime.a_name }} - Episode: {{ w.curr_episode }}</li>
+	{% endfor %}
+</ul>
+</div>
+
+<div id="PList">
+<h3>Priority List</h3>
+<ol>
+	{% for entry in plist %}
+	<li>{{ entry.anime.a_name }}</li>
+	{% endfor %}
+</ol>
+</div>
+{% endblock %}
+
 {{block.footer }}
