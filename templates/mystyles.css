@@ -10,7 +10,9 @@ font-family: Raavi;
 
 .APStuff {font-style: italic;}
 
-ol, ul {font-weight: bold;}
+ol, ul {font-weight: bold; }
+li.PList {list-style: none;}
+input.PListText {width: 40px;}
 
 A.List:link, A.List:visited {color: blue}
 A.List:hover {color: red}
