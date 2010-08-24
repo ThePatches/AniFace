@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render_to_response, redirect, get_object_or_404
 from aniface.models import Anime, P_List, AniPerList
 from mysite.aniface.mvmt import *
 from django.contrib.auth import logout
@@ -119,6 +119,12 @@ def leave(request):
     logout(request)
     return render_to_response('logout.html')
 
-def go_login(request):
+def go_login(request): #goes to login and redirects to the main page.
     return redirect('/accounts/login/?next=/aniface/')
-    #return redirect('/accounts/login/?next=' + request.path)
+
+def u_page(request, u_name):
+    u = get_object_or_404(User, username=u_name)
+    plist = P_List.objects.filter(person=u).order_by('ordinal')
+    watching = AniPerList.objects.filter(person=u, curr_episode__gt=0)
+    return render_to_response('person.html', {'u' : u, 'plist' : plist,
+                                              'watching' : watching}) 
