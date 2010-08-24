@@ -20,11 +20,12 @@
 </div>
 
 <div id="extras_form">
+    <h2>Add Anime to the Priority List</h2>
 <form action="/aniface/add_to_list/" method="post">
     {% csrf_token %}<!-- ensures that post comes from the site, -->
-    <ul style="{list-style-type: none; list-style: none;}">
+    <ul>
     {% for a in alist %}
-    <li><input type="text" name="{{ a.ap_slug }}"  id="{{ a.ap_slug }}" text-align="left" /> {{ a.a_name }}
+    <li class="PList"><input type="text" name="{{ a.ap_slug }}" class="PListText" id="{{ a.ap_slug }}" text-align="left" /> {{ a.a_name }}
     {% endfor %}
     </ul>
 <input type="submit" value="Add" />
