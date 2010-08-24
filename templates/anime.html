@@ -21,12 +21,16 @@
 </tr>
 	{% for filename in file_list %}
 	{% if marker == forloop.counter %}
-	<tr class="Watched">
+	<tr class="Marked">
 		<td>
 		Marked
 		{% else %}
-		<tr>
-			<td>
+		{% if forloop.counter < marker %}
+			<tr class="Watched">
+		{% else %}
+			<tr>
+		{% endif %}
+			<td> 
 		<a class="List" href="{% url aniface.views.mark anime.ap_slug %}?ep={{ forloop.counter }}">Mark</a>
 		{% endif %}
 		</td>

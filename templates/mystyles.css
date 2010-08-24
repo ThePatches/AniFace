@@ -19,7 +19,8 @@ A.List:link, A.List:visited {color: blue}
 A.List:hover {color: red}
 A.List:active {color: purple}
 
-TR.Watched {background-color: #66CCCC}
+TR.Watched {background-color: #339999}
+TR.Marked {background-color: #66CCCC}
 
 P.Footer
     {
