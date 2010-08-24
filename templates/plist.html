@@ -8,9 +8,9 @@
     <ol>
     {% for entry in pl %}
         <li>{{ entry.anime.a_name }}
-        <a class="List" href="/aniface/move/{{ entry.anime.ap_slug }}/?dr=1">Up</a>
-        <a class="List" href="/aniface/move/{{ entry.anime.ap_slug }}/?dr=2">Down</a>&#x0009;
-        <a class="List" href="/aniface/remove/?loc={{ forloop.counter }}">Remove</a></li>
+        <a class="List" href="{% url aniface.views.movepl entry.anime.ap_slug %}?dr=1">Up</a>
+        <a class="List" href="{% url aniface.views.movepl entry.anime.ap_slug %}?dr=2">Down</a>&#x0009;
+        <a class="List" href="{% url aniface.views.rm_plist %}?loc={{ forloop.counter }}">Remove</a></li>
     {% endfor %}
     </ol>
     
@@ -21,7 +21,7 @@
 
 <div id="extras_form">
     <h2>Add Anime to the Priority List</h2>
-<form action="/aniface/add_to_list/" method="post">
+<form action="{% url aniface.views.add_plist %}" method="post">
     {% csrf_token %}<!-- ensures that post comes from the site, -->
     <ul>
     {% for a in alist %}

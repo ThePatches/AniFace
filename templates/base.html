@@ -6,8 +6,11 @@
 <link rel="stylesheet" type="text/css" href="/aniface/af_media/mystyles.css" />
 </head>
 <body>
-    You are logged in as: {{ u.username }} -
+    You are logged in as: {{ u.username }} {% if u.username != 'Guest' %} -
     <a href="{% url aniface.views.leave %}">logout</a>
+    {% else %}
+    <a href="{% url aniface.views.go_login %}">login</a>
+    {% endif %}
     {% block body %}
     Body Here.
     {% endblock %}
