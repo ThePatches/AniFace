@@ -108,4 +108,4 @@ def play(request, ap_slug):
     
 def leave(request):
     logout(request)
-    return redirect('/aniface/')
+    return render_to_response('logout.html')
