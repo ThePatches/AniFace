@@ -20,6 +20,14 @@
 </div>
 
 <div id="extras_form">
-    [This space left purposefully blank]
+<form action="/aniface/add_to_list/" method="post">
+    {% csrf_token %}<!-- ensures that post comes from the site, -->
+    <ul style="{list-style-type: none; list-style: none;}">
+    {% for a in alist %}
+    <li><input type="text" name="{{ a.ap_slug }}"  id="{{ a.ap_slug }}" text-align="left" /> {{ a.a_name }}
+    {% endfor %}
+    </ul>
+<input type="submit" value="Add" />
+</form>
 </div>
 <b><a href="/aniface/">Return to AniFace Home</a></b>

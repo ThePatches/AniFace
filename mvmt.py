@@ -34,13 +34,12 @@ def MoveDown(apslug, u): #should maybe be user? probably
 def PlaceIn(apslug, u, loc):
     a = Anime.objects.get(ap_slug=apslug)
     
-    if (len(P_List.objects.all().filter(anime=a))) > 0: # protection against duplicates
+    if P_List.objects.filter(anime=a).exists(): # protection against duplicates
         return 1
     
     list_loc = P_List.objects.all().filter(person=u, ordinal=loc)
     if len(list_loc) == 0:
-        pl = P_List(anime=a, ordinal=loc, person=u)
-        pl.save()
+        P_List.objects.create(anime=a, ordinal=loc, person=u)
         return 0
     
     del list_loc
@@ -50,8 +49,7 @@ def PlaceIn(apslug, u, loc):
         entry.ordinal = entry.ordinal + 1
         entry.save()
         
-    np = P_List(anime=a, ordinal=loc, person=u)
-    np.save()
+    P_List.objects.create(anime=a, ordinal=loc, person=u)
     
     return 0
     

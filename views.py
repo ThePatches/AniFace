@@ -4,6 +4,7 @@ from mysite.aniface.mvmt import *
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404, HttpResponseBadRequest
+from django.template import RequestContext
 import mysite.aniface.mvmt
 import os
 import glob
@@ -35,8 +36,10 @@ def anime(request, ap_slug):
 @login_required()
 def pr_list(request):
     u = request.user
-    pl = P_List.objects.all().filter(person=u).order_by('ordinal')
-    return render_to_response('plist.html', {'pl' : pl})
+    pl = P_List.objects.filter(person=u).order_by('ordinal') # pull the priority list
+    alist = Anime.objects.exclude(id__in=pl.values_list('anime')) # pull the excluded anime list
+    return render_to_response('plist.html', {'pl' : pl, 'alist' : alist},
+                              context_instance=RequestContext(request))
 
 @login_required()
 def mark(request, ap_slug):
@@ -81,3 +84,12 @@ def rm_plist(request):
         return HttpResponseBadRequest('Errors occurred on removal')
     else:
         return redirect('/aniface/plist')
+        
+@login_required()
+def add_plist(request):
+    u = request.user
+    for an in Anime.objects.all():
+        if an.ap_slug in request.POST: PlaceIn(an.ap_slug, u, request.POST[an.ap_slug])
+    #PlaceIn('shamanic-princess', u, 2)
+    
+    return redirect('/aniface/plist')

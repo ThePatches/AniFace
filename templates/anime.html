@@ -5,9 +5,11 @@
 </head>
 <body>
 <h1>{{ anime.a_name }}</h1>
+<div class="APStuff">
 <h3>Synopsis</h3>
-<b><a class="APStuff" href="http://www.anime-planet.com/anime/{{ anime.ap_slug }}">AP Link</a></b>
-<div class="APStuff">[Anime Synopsis goes here]</div>
+<b><a href="http://www.anime-planet.com/anime/{{ anime.ap_slug }}">AP Link</a></b>
+<p id="synop">[Anime Synopsis goes here]</p>
+</div>
 
 <h2>File location - {{ anime.location }}</h2>
 

@@ -13,6 +13,7 @@ urlpatterns = patterns('mysite.aniface.views',
     (r'^mark/(?P<ap_slug>[\w.+\-]{0,100})/$', 'mark'),
     (r'^move/(?P<ap_slug>[\w.+\-]{0,100})/$', 'movepl'),
     (r'^remove/$', 'rm_plist'),
+    (r'^add_to_list/$', 'add_plist'),
 )
 
 if settings.DEBUG:
