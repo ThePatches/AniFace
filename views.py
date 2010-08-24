@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response, redirect
 from mysite.aniface.models import Anime, P_List, AniPerList
 from mysite.aniface.mvmt import *
+from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404, HttpResponseBadRequest
@@ -39,7 +40,7 @@ def pr_list(request):
     u = request.user
     pl = P_List.objects.filter(person=u).order_by('ordinal') # pull the priority list
     alist = Anime.objects.exclude(id__in=pl.values_list('anime')) # pull the excluded anime list
-    return render_to_response('plist.html', {'pl' : pl, 'alist' : alist},
+    return render_to_response('plist.html', {'pl' : pl, 'alist' : alist, 'u' : request.user},
                               context_instance=RequestContext(request))
 
 @login_required()
@@ -103,3 +104,8 @@ def play(request, ap_slug):
         return HttpResponseBadRequest('Bad MIME Type passed!')
     return HttpResponse(FileIterWrapper(open(a.location + '/' + val)),
                         mimetype=GetMime(val))
+    
+    
+def leave(request):
+    logout(request)
+    return redirect('/aniface/')

@@ -3,7 +3,8 @@
 <link rel="stylesheet" type="text/css" href="/aniface/af_media/mystyles.css" />
 <head>
 <div id="p_list">
-<h1>Priority List</h1>
+<h1>Priority List for {{ u.username }}</h1>
+<a href="/aniface/logout/">log out</a>
 {% if pl %}
     <ol>
     {% for entry in pl %}
