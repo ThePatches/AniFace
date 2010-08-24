@@ -11,6 +11,8 @@
     {% else %}
     <a class="List" href="{% url aniface.views.go_login %}">log in</a>
     {% endif %}
+    
+    <h1>{% block t_line %}Page Title Line Here{% endblock %}</h1>
     {% block body %}
     Body Here.
     {% endblock %}
