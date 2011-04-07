@@ -20,8 +20,8 @@ more fun working on the whistles and bells.
 Workflow
 ============
 I am currently using a version of the workflow described `here
-<http://nvie.com/git-model>`_. which eventually became *italics*Git
-Flow*italics*, so I'll only list the workflows that will show up
+<http://nvie.com/git-model>`_. which eventually became *Git
+Flow*, so I'll only list the workflows that will show up
 frequently.
 
 Master
